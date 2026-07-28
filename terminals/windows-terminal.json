@@ -1,0 +1,23 @@
+{
+    "name": "Campbell Readable",
+    "background": "#0C0C0C",
+    "foreground": "#CCCCCC",
+    "cursorColor": "#FFFFFF",
+    "selectionBackground": "#FFFFFF",
+    "black": "#0C0C0C",
+    "red": "#C50F1F",
+    "green": "#13A10E",
+    "yellow": "#C19C00",
+    "blue": "#4C7FFF",
+    "purple": "#881798",
+    "cyan": "#4EC9E0",
+    "white": "#CCCCCC",
+    "brightBlack": "#767676",
+    "brightRed": "#E74856",
+    "brightGreen": "#16C60C",
+    "brightYellow": "#F9F1A5",
+    "brightBlue": "#3B78FF",
+    "brightPurple": "#B4009E",
+    "brightCyan": "#61D6D6",
+    "brightWhite": "#F2F2F2"
+}

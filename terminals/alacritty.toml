@@ -1,0 +1,4 @@
+# ~/.config/alacritty/alacritty.toml 에 병합
+[colors.normal]
+blue = "#4C7FFF"
+cyan = "#4EC9E0"
