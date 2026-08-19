@@ -95,18 +95,42 @@ chmod +x install.sh && ./install.sh
 | Ghostty | `ghostty.conf` | `~/.config/ghostty/config` |
 | WezTerm | `wezterm.lua` | `~/.wezterm.lua` |
 
-## 바꾸는 색은 2개뿐
+## 팔레트: Argonaut 기반, 한 칸만 보정
 
-기본 팔레트(Windows Terminal 은 Campbell)에서 두 색만 교체한다.
+Windows Terminal 기본(Campbell)의 `blue #0037DA` 는 검정 배경에서 2.4:1 이라
+`import`/`const`/`class` 가 안 읽힌다. 그래서 배경이 거의 검정이면서 채도가 가장
+높은 팔레트로 갈아탔다 — **Argonaut**(배경 `#0e1019`, 채도 77로 후보 중 최고).
+
+원본에서 바꾼 값은 딱 하나다.
 
 | slot | before | after | 이유 |
 |---|---|---|---|
-| `blue` (ANSI 4) | `#0037DA` | `#4C7FFF` | 배경 대비 2.4:1 → 5.4:1. `import`/`const`/`class` 가 남색이라 안 읽히던 문제 |
-| `cyan` (ANSI 6) | `#3A96DD` | `#4EC9E0` | 색상 206° → 189°. 객체 키와 타입명이 둘 다 파랑 계열이라 안 구분되던 문제 |
+| `brightBlack` (ANSI 8) | `#444444` | `#828282` | 배경 대비 1.9:1 → 4.9:1. Claude Code 가 경로·힌트·요약 줄에 이 색을 쓰는데 안 읽혔다 (값은 Firefly Traditional 에서 가져옴) |
 
-`red` `green` `yellow` 등 나머지는 건드리지 않는다. 그래서 `git diff`
-추가=초록/삭제=빨강, 에러=빨강, `ls` 색이 전부 관습대로 유지된다.
+측정값 (배경 `#0e1019` 기준):
 
-전체 팔레트를 바꾸는 테마들이 흔히 이 부분을 깨뜨린다. ANSI 슬롯은 색 이름이
-아니라 **의미**를 담고 있어서, `green` 에 회색을 넣으면 `git diff` 의 추가
-줄이 회색이 되고 `red` 에 초록을 넣으면 에러 메시지가 초록으로 나온다.
+| 항목 | 값 |
+|---|---|
+| 키워드 `blue #008df8` | 5.6:1 |
+| 객체 키 `cyan #00d8eb` | 8.6:1 |
+| 본문 `#fffaf4` | 18.3:1 |
+| 슬롯 최저(문자열 `red`) | 4.8:1 |
+| 슬롯 간 최소 색차 ΔE | 63.8 (blue↔cyan) |
+
+`red` `green` `yellow` 는 여전히 빨강·초록·노랑이라 `git diff` 추가/삭제, 에러
+메시지, `ls` 색 같은 **ANSI 슬롯의 관습은 그대로 유지**된다. ANSI 슬롯은 색 이름이
+아니라 **의미**를 담고 있어서, `green` 에 회색을 넣으면 `git diff` 추가 줄이 회색이
+되고 `red` 에 초록을 넣으면 에러 메시지가 초록으로 나온다 — 팔레트를 갈아탈 때
+그 관습이 살아 있는지부터 본다.
+
+> 이전 판은 Campbell 에서 `blue`·`cyan` 두 칸만 바꾼 `Campbell Readable` 이었다.
+> 최소 보정이라는 장점은 있었지만 배경(`#0C0C0C`)과 채도가 그대로라 코드가 밋밋했다.
+> 그 정의가 필요하면 git 이력에서 꺼내 쓰면 된다.
+
+### herdr 를 함께 쓴다면
+
+`herdr_custom` 의 herdr 설정은 `[theme] name = "terminal"` 이라 herdr 가 이
+팔레트를 그대로 따른다. 그때 **선택된 탭/pane 의 배경(accent)** 이 팔레트의
+`blue #008df8` 가 되는데, 그 위에 얹히는 흐린 글자는 대비 1.1:1 로 안 보인다.
+그래서 herdr 쪽에 `[theme.custom] accent = "#1e3a5f"` 를 함께 둔다
+(그 위 본문 11.1:1, 흐린 글자 3.0:1). **팔레트를 바꾸면 accent 도 같이 봐야 한다.**
