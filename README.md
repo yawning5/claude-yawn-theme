@@ -95,6 +95,11 @@ chmod +x install.sh && ./install.sh
 | Ghostty | `ghostty.conf` | `~/.config/ghostty/config` |
 | WezTerm | `wezterm.lua` | `~/.wezterm.lua` |
 
+`terminals/` 의 나머지 파일은 **`windows-terminal.json` 에서 기계적으로 생성**한다 —
+정본은 그 한 파일이다. 색을 고칠 땐 거기서 고치고 나머지를 다시 생성한다(각 파일
+머리에도 같은 문구를 적어 뒀다). 예전엔 `blue`·`cyan` 두 칸만 담았지만, 지금은
+팔레트 전체를 갈아타므로 16색 + 배경/전경을 전부 담는다.
+
 ## 팔레트: Argonaut 기반, 한 칸만 보정
 
 Windows Terminal 기본(Campbell)의 `blue #0037DA` 는 검정 배경에서 2.4:1 이라
